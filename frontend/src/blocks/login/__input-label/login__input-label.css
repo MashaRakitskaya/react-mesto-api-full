@@ -1,0 +1,8 @@
+.login__input-label {
+    margin-bottom: 30px;
+    display: block;
+    position: relative;
+}
+.login__input-label:last-of-type {
+    margin-bottom: 0px;
+}

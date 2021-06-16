@@ -1,0 +1,11 @@
+.sign-up__login {
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    color: #FFFFFF;
+    cursor: pointer;
+   }                     
+   
+.sign-up__login:hover {
+    opacity: 0.6;
+}

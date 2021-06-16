@@ -1,0 +1,6 @@
+.element__position {
+    margin-top: 25px;
+    margin-bottom: 31px;
+    display: grid;
+    grid-template-columns: 1fr 0.3fr;
+}
