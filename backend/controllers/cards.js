@@ -43,8 +43,9 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
+  const { id } = req.params;
   Card.findByIdAndUpdate(
-    req.params.id,
+    id,
     { $addToSet: { likes: req.user._id } },
     // eslint-disable-next-line comma-dangle
     { new: true }
@@ -63,8 +64,9 @@ module.exports.likeCard = (req, res, next) => {
 };
 
 module.exports.dislikeCard = (req, res, next) => {
+  const { id } = req.params;
   Card.findByIdAndUpdate(
-    req.params.id,
+    id,
     { $pull: { likes: req.user._id } },
     // eslint-disable-next-line comma-dangle
     { new: true }
