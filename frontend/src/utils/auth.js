@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.rakitskaya.mesto.nomoredomains.club";
+export const BASE_URL = "https://api.rakitskaya.mesto.nomoredomains.club";
 
 const checkAnswerCorrectness = (response) => {
   if (response.ok) {

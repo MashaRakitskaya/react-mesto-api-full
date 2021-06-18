@@ -49,7 +49,7 @@ class Api {
   //добавить или снять лайк карточке
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
-      return fetch(`${this._address}/cards/likes/${cardId}`, {
+      return fetch(`${this._address}/cards/${cardId}/likes`, {
         method: "PUT",
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -57,7 +57,7 @@ class Api {
         },
       }).then((response) => this._checkAnswerCorrectness(response));
     } else {
-      return fetch(`${this._address}/cards/likes/${cardId}`, {
+      return fetch(`${this._address}/cards/${cardId}/likes`, {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -106,7 +106,7 @@ class Api {
 }
 
 const config = {
-  address: "http://api.rakitskaya.mesto.nomoredomains.club",
+  address: "https://api.rakitskaya.mesto.nomoredomains.club",
 };
 
 const api = new Api(config);
