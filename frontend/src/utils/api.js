@@ -46,25 +46,26 @@ class Api {
     }).then((response) => this._checkAnswerCorrectness(response));
   }
 
-  //добавить или снять лайк карточке
-  changeLikeCardStatus(cardId, isLiked) {
-    if (isLiked) {
-      return fetch(`${this._address}/cards/${cardId}/likes`, {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      }).then((response) => this._checkAnswerCorrectness(response));
-    } else {
-      return fetch(`${this._address}/cards/${cardId}/likes`, {
-        method: "DELETE",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      }).then((response) => this._checkAnswerCorrectness(response));
-    }
+  //добавить лайк карточке
+  addLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      },
+    }).then((response) => this._checkAnswerCorrectness(response));
+  }
+
+  //удалить лайк у карточки
+  deleteLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+      },
+    }).then((response) => this._checkAnswerCorrectness(response));
   }
 
   //добавить информацию о пользователе на сервер
