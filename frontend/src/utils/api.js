@@ -106,7 +106,7 @@ class Api {
 }
 
 const config = {
-  address: "http://api.rakitskaya.mesto.nomoredomains.club",
+  address: "https://api.rakitskaya.mesto.nomoredomains.club",
 };
 
 const api = new Api(config);

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.rakitskaya.mesto.nomoredomains.club";
+export const BASE_URL = "https://api.rakitskaya.mesto.nomoredomains.club";
 
 const checkAnswerCorrectness = (response) => {
   if (response.ok) {
@@ -15,6 +15,7 @@ export const register = (email, password) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify({ email, password }),
   }).then((response) => checkAnswerCorrectness(response));
 };
@@ -26,6 +27,7 @@ export const authorize = (email, password) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify({ email, password }),
   }).then((response) => checkAnswerCorrectness(response));
 };
@@ -38,6 +40,7 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
   })
     .then((response) => checkAnswerCorrectness(response))
     .then((data) => data);

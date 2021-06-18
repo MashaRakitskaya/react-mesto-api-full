@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -17,6 +18,20 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useCreateIndex: true,
   useFindAndModify: false,
 });
+
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'https://api.rakitskaya.mesto.nomoredomains.club',
+    'https://github.com/MashaRakitskaya/react-mesto-api-full.git',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  credentials: true,
+};
+app.use('*', cors(options));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
