@@ -88,7 +88,7 @@ module.exports.updateUser = (req, res, next) => {
     { runValidators: true, new: true }
   )
     .orFail(new Error('NotValidId'))
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Нет пользователя с таким id'));
@@ -109,7 +109,7 @@ module.exports.updateAvatar = (req, res, next) => {
     { runValidators: true, new: true }
   )
     .orFail(new Error('NotValidId'))
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Нет пользователя с таким id'));
@@ -129,7 +129,7 @@ module.exports.login = (req, res, next) => {
         token: jwt.sign(
           { _id: user._id },
           NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-          { expiresIn: '7d' },
+          { expiresIn: '7d' }
         ),
       });
     })

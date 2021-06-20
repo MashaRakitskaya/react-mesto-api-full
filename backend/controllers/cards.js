@@ -51,7 +51,7 @@ module.exports.likeCard = (req, res, next) => {
     { new: true }
   )
     .orFail(new Error('NotValidId'))
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Карточка с указанным _id не найдена'));
@@ -72,7 +72,7 @@ module.exports.dislikeCard = (req, res, next) => {
     { new: true }
   )
     .orFail(new Error('NotValidId'))
-    .then((user) => res.status(200).send(user))
+    .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.message === 'NotValidId') {
         next(new NotFoundError('Карточка с указанным _id не найдена'));

@@ -3,7 +3,7 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup.js";
@@ -74,7 +74,6 @@ function App() {
       Promise.all([api.getUserInformation(), api.getInitialCards()])
         .then(([userData, cardsData]) => {
           setCurrentUser(userData);
-          console.log(currentUser);
           setData({ email: userData.email });
           setCards(cardsData);
         })
@@ -90,11 +89,9 @@ function App() {
       .addUserInfo({ name: name, about: about })
       .then((result) => {
         setCurrentUser(result);
-      })
-      .catch((err) => console.log(`Ошибка отправки информации${err}`))
-      .finally(() => {
         closeAllPopups();
-      });
+      })
+      .catch((err) => console.log(`Ошибка отправки информации${err}`));
   }
 
   function handleUpdateAvatar({ avatar }) {
@@ -102,11 +99,9 @@ function App() {
       .addUserAvatar({ avatar: avatar })
       .then((result) => {
         setCurrentUser(result);
-      })
-      .catch((err) => console.log(`Ошибка отправки информации${err}`))
-      .finally(() => {
         closeAllPopups();
-      });
+      })
+      .catch((err) => console.log(`Ошибка отправки информации${err}`));
   }
 
   function handleAddPlaceSubmit({ name, link }) {
@@ -114,11 +109,9 @@ function App() {
       .addCard({ name: name, link: link })
       .then((result) => {
         setCards([result, ...cards]);
-      })
-      .catch((err) => console.log(`Ошибка отправки информации${err}`))
-      .finally(() => {
         closeAllPopups();
-      });
+      })
+      .catch((err) => console.log(`Ошибка отправки информации${err}`));
   }
 
   function handleCardLike(card, isLiked) {
@@ -134,7 +127,7 @@ function App() {
     api
       .removeCard(card._id)
       .then((newCard) => {
-        const removeCard = cards.filter((c) => c._id !== card._id);
+        const removeCard = cards.filter((item) => item._id !== card._id);
         setCards(removeCard);
       })
       .catch((err) => console.log(`Ошибка отправки информации${err}`));
@@ -174,7 +167,7 @@ function App() {
       });
   }
 
-  const handleTokenCheck = useCallback(() => {
+  function handleTokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
       auth
@@ -182,7 +175,6 @@ function App() {
         .then((result) => {
           if (result) {
             setLoggedIn(true);
-            setData({ email: result.data.email });
             history.push("/main");
           }
         })
@@ -191,10 +183,11 @@ function App() {
           console.log(`${err}`);
         });
     }
-  }, [history]);
+  }
 
   useEffect(() => {
     handleTokenCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleSignOut() {
@@ -217,9 +210,9 @@ function App() {
               handleEditAvatarClick={handleEditAvatarClick}
               handleEditProfileClick={handleEditProfileClick}
               handleAddPlaceClick={handleAddPlaceClick}
-              handleCardClick={handleCardClick}
-              handleLikeClick={handleCardLike}
-              handleCardDelete={handleCardDelete}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
               cards={cards}
             />
 
