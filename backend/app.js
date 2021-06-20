@@ -24,6 +24,10 @@ const options = {
   origin: [
     'http://localhost:3000',
     'https://api.rakitskaya.mesto.nomoredomains.club',
+    'https://rakitskaya.mesto.nomoredomains.club',
+    'http://rakitskaya.mesto.nomoredomains.club',
+    'http://api.rakitskaya.mesto.nomoredomains.club',
+    'https://api.rakitskaya.mesto.nomoredomains.club/users/me',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
