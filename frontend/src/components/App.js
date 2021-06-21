@@ -136,17 +136,20 @@ function App() {
   function handleRegister(email, password) {
     auth
       .register(email, password)
-      .then((result) => {
-        handleInfoTooltip();
-        history.push("/signin");
+      .then((res) => {
+        if (res) {
+          handleInfoTooltip();
+          history.push("/signin");
+        } else {
+          handleInfoTooltip();
+          setInfoTooltipInformation({
+            title: "Что-то пошло не так! Попробуйте ещё раз.",
+            icon: false,
+          });
+          history.push("/signup");
+        }
       })
       .catch((err) => {
-        handleInfoTooltip();
-        setInfoTooltipInformation({
-          title: "Что-то пошло не так! Попробуйте ещё раз.",
-          icon: false,
-        });
-        history.push("/signup");
         console.log(`${err}`);
       });
   }
