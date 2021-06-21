@@ -137,20 +137,30 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        if (res) {
-          handleInfoTooltip();
-          history.push("/signin");
-        } else {
-          handleInfoTooltip();
+        setInfoTooltipInformation({
+          title: "Вы успешно зарегистрировались!",
+          icon: true,
+        });
+        handleInfoTooltip();
+        history.push("/signin");
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(`${err}`);
           setInfoTooltipInformation({
             title: "Что-то пошло не так! Попробуйте ещё раз.",
             icon: false,
           });
+          handleInfoTooltip();
           history.push("/signup");
+        } else {
+          setInfoTooltipInformation({
+            title: "Вы успешно зарегистрировались!",
+            icon: true,
+          });
+          handleInfoTooltip();
+          history.push("/signin");
         }
-      })
-      .catch((err) => {
-        console.log(`${err}`);
       });
   }
 
