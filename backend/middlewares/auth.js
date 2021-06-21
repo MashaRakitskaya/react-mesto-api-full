@@ -1,6 +1,6 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const AuthError = require('../errors/AuthError');
-const { NODE_ENV, JWT_SECRET } = process.env;
 
 const extractBearerToken = (header) => header.replace('Bearer ', '');
 
@@ -9,12 +9,13 @@ module.exports = (req, res, next) => {
   if (!authorization) {
     throw new AuthError('Необходима авторизация!');
   }
-  
+
   const token = extractBearerToken(authorization);
   let payload;
   try {
     payload = jwt.verify(
       token,
+      // eslint-disable-next-line comma-dangle
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
     );
   } catch (err) {

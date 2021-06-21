@@ -1,7 +1,7 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const BadRequestError = require('../errors/BadRequestError');
@@ -129,6 +129,7 @@ module.exports.login = (req, res, next) => {
         token: jwt.sign(
           { _id: user._id },
           NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+          // eslint-disable-next-line comma-dangle
           { expiresIn: '7d' }
         ),
       });
